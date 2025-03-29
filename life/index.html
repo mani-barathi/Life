@@ -8,13 +8,17 @@
   <title>Life</title>
 </head>
 
-<body>
-  <div id="app" class="p-5 container mx-auto font-sans">
-    <div class=" mb-5">
-      <label>Enter your DOB:</label>
-      <input type="date" id="date" class="border rounded" />
+<body class="bg-gray-50 pb-20">
+  <div id="app" class="p-5 max-w-5xl mx-auto font-sans">
+    <div class="flex justify-between mb-5">
+      <div class="flex flex-col">
+        <label class="text-sm mb-1">Date of Birth</label>
+        <input type="date" id="date" class="border rounded" />
+      </div>
+      <p id="percentage"></p>
     </div>
-    <div id="picture" class="flex flex-wrap gap-3"></div>
+    <div id="picture" class="flex flex-wrap gap-2 mb-2"></div>
+    <p class="text-sm ">* Each circle represents a month in your life.</p>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>

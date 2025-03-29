@@ -2,8 +2,9 @@ import "./style.css";
 
 const grid = document.querySelector("#picture");
 const datePicker = document.querySelector("#date");
+const percentage = document.querySelector("#percentage");
 let dob = new Date("2001/03/08");
-const AVERAGE_AGE = 75;
+const AVERAGE_AGE = 70;
 const TOTAL_MONTHS = AVERAGE_AGE * 12;
 
 const getMonthDiff = (d1, d2) => {
@@ -15,7 +16,7 @@ const getMonthDiff = (d1, d2) => {
 };
 
 const getEachMonth = (idx, currentMonth = 0) => {
-  let className = "w-5 h-5 rounded-full border";
+  let className = "w-4 h-4 rounded-full border";
   const isCompleted = idx < currentMonth;
   const onGoing = idx === currentMonth;
 
@@ -27,9 +28,8 @@ const getEachMonth = (idx, currentMonth = 0) => {
   return month;
 };
 
-const getLife = (dob) => {
+const getLife = (currentMonth) => {
   let monthEl = "";
-  const currentMonth = getMonthDiff(dob || new Date(), new Date());
 
   Array.from({ length: TOTAL_MONTHS }).map((_, idx) => {
     monthEl += getEachMonth(idx + 1, currentMonth);
@@ -38,9 +38,17 @@ const getLife = (dob) => {
   grid.innerHTML = monthEl;
 };
 
+const setPercentage = (currentMonth = 0) => {
+  const percent = (currentMonth / TOTAL_MONTHS) * 100;
+  percentage.textContent = `${percent.toFixed(1)}%`;
+};
+
 datePicker.addEventListener("change", (e) => {
   dob = new Date(e.target.value);
-  getLife(dob);
+  const currentMonth = getMonthDiff(dob || new Date(), new Date());
+  getLife(currentMonth);
+  setPercentage(currentMonth);
 });
 
-getLife();
+getLife(0);
+setPercentage(0);
